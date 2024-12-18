@@ -1,0 +1,43 @@
+<div>
+  <app-card>
+    <div id="login--container">
+      <h2>Login</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="control">
+          <label class="control--label" for="email">Email</label>
+          <input
+            class="control--input"
+            type="email"
+            id="email"
+            formControlName="email"
+          />
+          @if(isEmailInValid){
+          <p class="control--error">Enter a valid email</p>
+          }
+        </div>
+        <div class="control">
+          <label class="control--label" for="password">Password</label>
+          <input
+            class="control--input"
+            type="password"
+            id="password"
+            formControlName="password"
+          />
+          @if(isPasswordInValid ){
+          <p class="control--error">Min length of password should be 6.</p>
+          }
+        </div>
+        <button
+          type="submit"
+          [class.disabled]="this.loginForm.invalid"
+          [disabled]="this.loginForm.invalid"
+        >
+          Login
+        </button>
+      </form>
+      <a id="footer-cta" [routerLink]="['../', this.redirectPath]">
+        {{ this.redirectCTAText }}</a
+      >
+    </div>
+  </app-card>
+</div>

@@ -1,0 +1,12 @@
+#root-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+#root-child-div {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}

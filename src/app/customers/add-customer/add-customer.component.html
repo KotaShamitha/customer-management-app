@@ -1,0 +1,36 @@
+<div class="form-container">
+    <h2>Add Customer</h2>
+
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" formControlName="name" placeholder="Enter name" required>
+            <small *ngIf="name?.invalid && (name?.dirty || name?.touched)">Name is required.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" placeholder="Enter email" required>
+            <small *ngIf="email?.invalid && (email?.dirty || email?.touched)">Please enter a valid email
+                address.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" formControlName="phone" placeholder="Enter phone" required>
+            <small *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">Phone number is required.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" formControlName="address" placeholder="Enter address" required></textarea>
+            <small *ngIf="address?.invalid && (address?.dirty || address?.touched)">Address is required.</small>
+        </div>
+
+        <button type="submit" [disabled]="customerForm.invalid">Add Customer</button>
+    </form>
+
+    <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+    </div>
+</div>
