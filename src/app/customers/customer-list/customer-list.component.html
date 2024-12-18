@@ -3,11 +3,20 @@
   <div *ngIf="customers.length <= 0" id="empty-list">
     <p>No customers found!</p>
   </div>
+
   <div *ngFor="let customer of customers; trackBy: trackByCustomerId">
-    <div class="customer-card">
+    <div class="customer-card" [ngClass]="{'expanded': selectedCustomer === customer}"
+      (click)="selectCustomer(customer)">
       <h3 class="customer-name">{{ customer.name }}</h3>
       <p class="customer-email">{{ customer.email }}</p>
-      <!-- Add any other customer details you want to display here -->
+
+      <div *ngIf="selectedCustomer === customer" class="customer-details">
+        <h4>Customer Details</h4>
+        <p><strong>Name:</strong> {{ customer.name }}</p>
+        <p><strong>Email:</strong> {{ customer.email }}</p>
+        <p><strong>Phone:</strong> {{ customer.phone }}</p>
+        <p><strong>Address:</strong> {{ customer.address }}</p>
+      </div>
     </div>
   </div>
 </div>

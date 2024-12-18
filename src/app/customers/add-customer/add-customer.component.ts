@@ -32,14 +32,11 @@ export class AddCustomerComponent {
 
   onSubmit(): void {
     if (this.customerForm.valid) {
-      // Handle the form submission logic, such as calling a service
       const newCustomer = this.customerForm.value;
       this.customersService.addCustomer(newCustomer).subscribe(
         () => {
           this.successMessage = "Customer added successfully!";
-          // Reset form after submission (optional)
           this.customerForm.reset();
-          // Navigate to the "All Customers" view
           this.router.navigate(['/customers']);
         },
         (error) => {
@@ -52,7 +49,6 @@ export class AddCustomerComponent {
     }
   }
 
-  // Getter methods for form controls
   get name() { return this.customerForm.get('name'); }
   get email() { return this.customerForm.get('email'); }
   get phone() { return this.customerForm.get('phone'); }

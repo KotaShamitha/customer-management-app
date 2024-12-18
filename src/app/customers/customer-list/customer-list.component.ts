@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomersService, Customer } from '../customers.service';
+import { CustomersService, Customer } from '../customers.service'; 
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-customer-list',
   standalone: true,
@@ -10,22 +11,31 @@ import { CommonModule } from '@angular/common';
 })
 export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];
+  selectedCustomer: Customer | null = null; 
 
-  trackByCustomerId(index: number, customer: Customer): number {
-    return Number(customer.id);
-  }
-  
   constructor(private service: CustomersService) {}
 
   ngOnInit(): void {
-    this.service.getCustomers().subscribe((data) => {
-      this.customers = data;
-    });
+    this.getCustomers();
   }
 
+  
   getCustomers(): void {
     this.service.getCustomers().subscribe((data) => {
       this.customers = data;
     });
+  }
+
+  selectCustomer(customer: Customer): void {
+    if (this.selectedCustomer === customer) {
+      this.selectedCustomer = null; 
+    } else {
+      this.selectedCustomer = customer;
+    }
+  }
+
+  
+  trackByCustomerId(index: number, customer: Customer): number {
+    return Number(customer.id);
   }
 }
