@@ -16,7 +16,7 @@ export class ViewCustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getCustomers().subscribe((customers: Customer[]) => {
-      this.customerDetails = customers[0]; // Example: Show the first customer's details
+      this.customerDetails = customers[0]; 
     });
   }
 }

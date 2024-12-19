@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class AddCustomerComponent {
   customerForm: FormGroup;
 
-  // Success message property (optional)
+  
   successMessage!: string;
 
   constructor(
@@ -37,16 +37,37 @@ export class AddCustomerComponent {
         () => {
           this.successMessage = "Customer added successfully!";
           this.customerForm.reset();
+
+          
+          setTimeout(() => {
+            this.fadeOutSuccessMessage();
+          }, 1000);
+
           this.router.navigate(['/customers']);
         },
         (error) => {
           this.successMessage = "Error adding customer. Please try again.";
+          setTimeout(() => {
+            this.fadeOutSuccessMessage();
+          }, 1000);
         }
-  
       );
     } else {
       this.successMessage = "Please fill in all required fields.";
+      setTimeout(() => {
+        this.fadeOutSuccessMessage();
+      }, 1000);
     }
+  }
+
+  fadeOutSuccessMessage(): void {
+    const successMessageElement = document.querySelector('.success-message');
+    if (successMessageElement) {
+      successMessageElement.classList.add('fade-out');
+    }
+    setTimeout(() => {
+      this.successMessage = ''; 
+    }, 1000);
   }
 
   get name() { return this.customerForm.get('name'); }

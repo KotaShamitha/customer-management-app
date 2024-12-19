@@ -5,27 +5,16 @@
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="control">
           <label class="control--label" for="email">Email</label>
-          <input
-            class="control--input"
-            type="email"
-            id="email"
-            formControlName="email"
-          />
+          <input class="control--input" type="email" id="email" formControlName="email" />
         </div>
         <div class="control">
           <label class="control--label" for="password">Password</label>
-          <input
-            class="control--input"
-            type="password"
-            id="password"
-            formControlName="password"
-          />
+          <input class="control--input" type="password" id="password" formControlName="password" />
         </div>
         <button type="submit">Sign up</button>
       </form>
       <a id="footer-cta" [routerLink]="['../', this.redirectPath]">
-        {{ this.redirectCTAText }}</a
-      >
+        {{ this.redirectCTAText }}</a>
     </div>
   </app-card>
 </div>

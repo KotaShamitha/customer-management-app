@@ -10,6 +10,11 @@
       <h3 class="customer-name">{{ customer.name }}</h3>
       <p class="customer-email">{{ customer.email }}</p>
 
+      <div class="customer-actions">
+        <button (click)="editCustomer(customer, $event)">Edit</button>
+        <button (click)="onDelete(customer.id)">Delete</button>
+      </div>
+
       <div *ngIf="selectedCustomer === customer" class="customer-details">
         <h4>Customer Details</h4>
         <p><strong>Name:</strong> {{ customer.name }}</p>

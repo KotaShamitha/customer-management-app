@@ -57,7 +57,6 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
-      // console.log('Form is invalid');
       return;
     }
     this.authService.login(

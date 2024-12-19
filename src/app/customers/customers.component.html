@@ -1,1 +1,13 @@
-<p>customers works!</p>
+<div class="customer-container">
+    <div *ngFor="let customer of customers; trackBy: trackByCustomerId" class="customer-card">
+        <h3 class="customer-name">{{ customer.name }}</h3>
+        <p class="customer-email">{{ customer.email }}</p>
+
+        <div class="customer-actions">
+            <button mat-button (click)="editCustomer(customer, $event)">Edit</button>
+            <button mat-raised-button color="warn" (click)="deleteCustomer(customer, $event)">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomersService, Customer } from '../customers.service'; 
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+
 
 @Component({
   selector: 'app-customer-list',
@@ -13,7 +16,7 @@ export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];
   selectedCustomer: Customer | null = null; 
 
-  constructor(private service: CustomersService) {}
+  constructor(private dialog: MatDialog, private customerService: CustomersService) {}
 
   ngOnInit(): void {
     this.getCustomers();
@@ -21,7 +24,7 @@ export class CustomerListComponent implements OnInit {
 
   
   getCustomers(): void {
-    this.service.getCustomers().subscribe((data) => {
+    this.customerService.getCustomers().subscribe((data) => {
       this.customers = data;
     });
   }
@@ -34,6 +37,27 @@ export class CustomerListComponent implements OnInit {
     }
   }
 
+  editCustomer(customer: any, event: Event): void {
+    event.stopPropagation(); 
+    console.log('Edit customer:', customer);
+    
+  }
+  
+  onDelete(customerId: string): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        message: 'Are you sure you want to delete this customer?'
+      },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.customerService.deleteCustomer(customerId).subscribe(() => {
+          this.getCustomers(); 
+        });
+      }
+    });
+  }
   
   trackByCustomerId(index: number, customer: Customer): number {
     return Number(customer.id);
